@@ -1,6 +1,6 @@
 # Proposal: Seatwise, honest crowding estimates for Delhi's buses
 
-**Team:** [team name and members, to fill]  **Problem:** 2, Crowdedness-aware journey planner
+**Team:** Team Rocket (Abhishek Jha, 2022023; Harsh Kumar, 2022198; Shreyashi Binod Kumar, 2022486)  **Problem:** 2, Crowdedness-aware journey planner
 
 ## The problem
 A packed bus is slow, uncomfortable and often skipped, yet journey planners rank trips only by time. Delhi records every e-ticket, but the data is a thin sample: about 1.2 tickets per bus trip, half without a vehicle number, with stop names that do not match the timetable. A naive per-route-hour count would mislead.
