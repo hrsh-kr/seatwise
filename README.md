@@ -2,6 +2,9 @@
 Transport Stack Hackathon 2026, Problem 2. Estimates how crowded Delhi buses are by route, stretch and time of day from
 sampled October 2026 e-ticket data, and shows that crowding next to every journey option.
 
+## Demo video
+A 4 minute 20 second walkthrough with narration (720p, 9 MB) is in [`video/seatwise-demo.mp4`](video/seatwise-demo.mp4): the problem and the data on slides, then the app, then validation and limits. The narration text is in [`docs/DEMO_SCRIPT.md`](docs/DEMO_SCRIPT.md).
+
 ## Run it (Python 3.12+)
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
