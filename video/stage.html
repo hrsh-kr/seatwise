@@ -1,0 +1,20 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>stage</title>
+<style>
+@font-face{font-family:"Hanken Grotesk Variable";font-weight:100 900;src:url("/static/fonts/hanken-grotesk-latin-wght-normal.woff2") format("woff2-variations")}
+html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:#101a2c}
+#view{position:absolute;left:107px;top:0;width:1706px;height:960px;border:0;background:#fff;transition:left .5s,width .5s,height .5s,top .5s,border-radius .5s}
+#view.app{width:1365px;height:768px;transform:scale(1.25);transform-origin:0 0}
+#view.phone{transform:none;left:766px;top:40px;width:390px;height:844px;border-radius:34px;box-shadow:0 0 0 10px #1b2a44}
+#sub{position:absolute;left:0;right:0;top:960px;height:120px;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;
+  font:500 40px/1.28 "Hanken Grotesk Variable",system-ui,sans-serif;padding:0 150px;white-space:pre-line}
+#fade{position:absolute;inset:0;background:#101a2c;opacity:1;transition:opacity .8s;pointer-events:none}
+</style></head><body>
+<iframe id="view" name="view"></iframe>
+<div id="sub"></div><div id="fade"></div>
+<script>
+function go(url){const v=document.getElementById('view');v.classList.toggle('app',url.indexOf('localhost:8000')>=0);v.classList.remove('phone');v.src=url}
+function sub(t){document.getElementById('sub').textContent=t||''}
+function fade(on){document.getElementById('fade').style.opacity=on?1:0}
+function phone(on){document.getElementById('view').classList.toggle('phone',!!on)}
+</script></body></html>
