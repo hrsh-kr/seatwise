@@ -1,0 +1,19 @@
+# data and derived outputs: large, and the data licence is unstated (see README to fetch)
+data/
+outputs/
+.venv/
+__pycache__/
+*.pyc
+.claude/
+.DS_Store
+
+# video build: models, voice notes and renders stay local
+video/models/
+video/voice/
+video/work/
+video/slides/deck.html
+video/out/
+video/out/*.mp4
+video/out/*.webm
+
+video/voice_test/
