@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Seatwise demo slides</title>
+<style>
+@font-face{font-family:"Hanken Grotesk Variable";font-weight:100 900;src:url("../../static/fonts/hanken-grotesk-latin-wght-normal.woff2") format("woff2-variations")}
+:root{
+  --page:#f4f7fb;--card:#fff;--text:#3d4a5c;--muted:#5f6e82;--line:#dfe6ef;--ink:#1f2d3d;--accent:#2f5fb3;
+  --seat:#4caf7a;--seat-ink:#1f6e3d;--seat-tint:#e8f6ed;--stand:#e8a33d;--stand-ink:#8a4b12;--stand-tint:#fdf1de;
+  --crowd:#d9534a;--crowd-ink:#b3261e;--crowd-tint:#fdeceb;--unk:#c3cdda;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:#0f1724}
+body{font-family:"Hanken Grotesk Variable",system-ui,sans-serif;color:var(--text);font-variant-numeric:tabular-nums}
+.slide{display:none;width:1706px;height:960px;background:var(--page);position:relative;overflow:hidden;padding:56px 72px 64px}
+.slide.on{display:block}
+.slide::before{content:"";position:absolute;inset:0 0 auto 0;height:300px;background:linear-gradient(180deg,rgba(76,175,122,.13),transparent)}
+.slide>*{position:relative}
+h1{font-size:60px;line-height:1.08;margin:0 0 6px;color:var(--ink);letter-spacing:-.025em;font-weight:700}
+.sub{font-size:28px;color:var(--muted);margin:0 0 30px}
+.num{position:absolute;right:40px;bottom:26px;font-size:22px;color:var(--muted)}
+.foot{position:absolute;left:72px;right:120px;bottom:26px;font-size:21px;color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:0 1px 2px rgba(61,74,92,.05)}
+.badge{display:inline-flex;align-items:center;gap:12px;padding:10px 20px 10px 16px;border-radius:14px;font-weight:650;font-size:30px;border:2px solid;white-space:nowrap}
+.badge.sm{font-size:22px;padding:8px 14px 8px 12px;gap:9px}
+.badge.l0{background:var(--seat-tint);color:var(--seat-ink);border-color:#8fd0a4}
+.badge.l1{background:var(--stand-tint);color:var(--stand-ink);border-color:#e3c98b}
+.badge.l2{background:var(--crowd-tint);color:var(--crowd-ink);border-color:#e3b0ab}
+.meter{display:inline-flex;gap:4px;align-items:flex-end;height:26px}.meter i{width:8px;border-radius:2px;background:currentColor;opacity:.28}.meter i.on{opacity:1}
+
+/* 1 title */
+#s1 .wrap{display:grid;grid-template-columns:1fr 760px;gap:40px;height:100%;align-items:center}
+#s1 h1{font-size:170px;letter-spacing:-.04em;margin:0}
+#s1 .lead{font-size:44px;color:var(--ink);margin:18px 0 44px;max-width:760px;line-height:1.25}
+#s1 .meta{font-size:28px;color:var(--muted);line-height:1.6}
+#s1 .meta b{color:var(--ink)}
+.bus{width:100%}
+/* 2 problem */
+#s2 .grid{display:grid;grid-template-columns:690px 1fr;gap:36px;margin-top:8px}
+.panel{padding:30px 34px}
+.panel h3{margin:0 0 16px;font-size:26px;color:var(--muted);font-weight:600;letter-spacing:.01em}
+.today{font-size:60px;font-weight:700;color:var(--ink);letter-spacing:-.02em}
+.today small{font-size:30px;color:var(--muted);font-weight:500;margin-left:10px}
+.stack{display:grid;gap:14px;margin-top:6px}
+.q{padding:34px 40px}
+.q .mark{font-size:100px;line-height:.6;color:var(--accent);font-weight:700}
+.q p.quote{font-size:38px;line-height:1.28;color:var(--ink);margin:10px 0 18px;font-weight:600}
+.q .cite{font-size:22px;color:var(--muted);line-height:1.4}
+.q .cite b{color:var(--ink)}
+.big{font-size:130px;font-weight:700;color:var(--accent);letter-spacing:-.04em;line-height:1}
+.q.row{display:grid;grid-template-columns:330px 1fr;gap:26px;align-items:center}
+/* 3 data */
+#s3 .grid{display:grid;grid-template-columns:1fr 520px;gap:36px}
+.chartcard{padding:26px 30px 14px}
+.chartcard h3{margin:0 0 4px;font-size:28px;color:var(--ink);font-weight:650}
+.chartcard .note{font-size:21px;color:var(--muted);margin:0 0 6px}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.tile{padding:24px 26px}
+.tile b{display:block;font-size:62px;color:var(--ink);letter-spacing:-.03em;line-height:1}
+.tile span{display:block;font-size:22px;color:var(--muted);margin-top:10px;line-height:1.3}
+.tile.warn b{color:var(--crowd-ink)}
+/* 4 approach */
+#s4 .grid{display:grid;grid-template-columns:640px 1fr;gap:36px}
+.steps{display:grid;gap:18px}
+.step{display:grid;grid-template-columns:70px 1fr;gap:22px;align-items:center;padding:24px 28px}
+.step .n{width:70px;height:70px;border-radius:50%;background:var(--accent);color:#fff;font-size:34px;font-weight:700;display:grid;place-items:center}
+.step b{display:block;font-size:31px;color:var(--ink)}.step span{font-size:23px;color:var(--muted)}
+/* 5 results */
+#s5 .grid{display:grid;grid-template-columns:600px 1fr;gap:30px}
+.limits{margin-top:20px;padding:20px 28px;font-size:22px;line-height:1.4}
+.limits h3{margin:0 0 4px;font-size:24px;color:var(--ink)}
+.limits ul{margin:0;padding-left:26px}.limits li{margin:4px 0}
+.repo{margin-top:20px;font-size:30px;color:var(--accent);font-weight:650}
+svg text{font-family:"Hanken Grotesk Variable",system-ui,sans-serif}
+.ax{fill:#5f6e82;font-size:20px}.gl{stroke:#dfe6ef}.lab{fill:#1f2d3d;font-size:22px;font-weight:650}
+</style>
+</head>
+<body>
+
+<section class="slide" id="s1"><div class="wrap">
+  <div>
+    <h1>Seatwise</h1>
+    <p class="lead">Bus crowding in Delhi, estimated from e-ticket data</p>
+    <div class="meta"><b>Transport Stack Hackathon 2026</b><br>Problem 2: crowdedness-aware journey planner<br>October 2026 ticket data · Delhi bus timetable</div>
+  </div>
+  <div>
+    <svg class="bus" viewBox="0 0 760 520" xmlns="http://www.w3.org/2000/svg">
+      <rect x="20" y="120" width="720" height="260" rx="40" fill="#fff" stroke="#c9d4e0" stroke-width="4"/>
+      <rect x="20" y="320" width="720" height="60" rx="0" fill="#e8f1fb"/>
+      <rect x="44" y="150" width="672" height="140" rx="18" fill="#eef5fc" stroke="#d4e0ee" stroke-width="3"/>
+      <g id="seats"></g>
+      <circle cx="160" cy="392" r="44" fill="#334155"/><circle cx="160" cy="392" r="18" fill="#c9d4e0"/>
+      <circle cx="600" cy="392" r="44" fill="#334155"/><circle cx="600" cy="392" r="18" fill="#c9d4e0"/>
+      <rect x="680" y="150" width="40" height="140" rx="10" fill="#d4e0ee"/>
+    </svg>
+    <div style="display:flex;gap:12px;justify-content:center;margin-top:18px;flex-wrap:nowrap">
+      <span class="badge sm l0"><span class="meter"><i class="on" style="height:12px"></i><i style="height:18px"></i><i style="height:24px"></i></span>Seats available</span>
+      <span class="badge sm l1"><span class="meter"><i class="on" style="height:12px"></i><i class="on" style="height:18px"></i><i style="height:24px"></i></span>Standing room</span>
+      <span class="badge sm l2"><span class="meter"><i class="on" style="height:12px"></i><i class="on" style="height:18px"></i><i class="on" style="height:24px"></i></span>Crowded</span>
+    </div>
+  </div>
+</div><div class="num">1</div></section>
+
+<section class="slide" id="s2">
+  <h1>Planners show time but not crowding</h1>
+  <p class="sub">Research on both buses and metro finds that crowding carries a real cost for passengers</p>
+  <div class="grid">
+    <div class="stack">
+      <div class="card panel"><h3>What a journey planner shows today</h3><div class="today">46 min<small>1 change</small></div></div>
+      <div class="card panel"><h3>What a rider also needs to know</h3>
+        <div style="display:grid;gap:14px;justify-items:start">
+          <span class="badge l0"><span class="meter"><i class="on" style="height:12px"></i><i style="height:18px"></i><i style="height:24px"></i></span>Seats available</span>
+          <span class="badge l1"><span class="meter"><i class="on" style="height:12px"></i><i class="on" style="height:18px"></i><i style="height:24px"></i></span>Standing room</span>
+          <span class="badge l2"><span class="meter"><i class="on" style="height:12px"></i><i class="on" style="height:18px"></i><i class="on" style="height:24px"></i></span>Crowded</span>
+        </div></div>
+    </div>
+    <div class="stack">
+      <div class="card q"><div class="mark">“</div>
+        <p class="quote">Crowding can significantly decrease passenger comfort and disrupt service delivery</p>
+        <div class="cite"><b>Sánchez-Martínez, Paget-Seekins, Southwick and Attanucci (2018)</b><br>Transportation Research Record · MBTA bus network, Boston</div></div>
+      <div class="card q row"><div class="big">26.5%</div>
+        <div><p class="quote" style="font-size:34px;margin:0 0 14px">“standing penalty is 26.5% of the uncrowded value” of in-vehicle travel time</p>
+        <div class="cite"><b>Hörcher, Graham and Anderson (2017)</b><br>Transportation Research Part B, 95 · smart card data from a metro system</div></div></div>
+    </div>
+  </div>
+  <div class="num">2</div></section>
+
+<section class="slide" id="s3">
+  <h1>Delhi's ticket data is rich but thin</h1>
+  <p class="sub">Every e-ticket is recorded, but each bus trip is only seen through a few of them</p>
+  <div class="grid">
+    <div class="card chartcard"><h3>Tickets through a typical weekday</h3><p class="note">Average of 19 weekdays in October 2026 · tickets per hour of day</p><div id="c3"></div></div>
+    <div class="tiles">
+      <div class="card tile"><b>2.56 million</b><span>e-tickets in October 2026</span></div>
+      <div class="card tile"><b>1.2</b><span>tickets for each scheduled bus trip</span></div>
+      <div class="card tile warn"><b>48.5%</b><span>of tickets carry no vehicle number</span></div>
+      <div class="card tile warn"><b>36%</b><span>of stop names do not match the timetable exactly</span></div>
+    </div>
+  </div>
+  <div class="foot">Delhi was the first city in India to provide static and real-time bus data feeds in November 2018 (Abisla, New America).</div>
+  <div class="num">3</div></section>
+
+<section class="slide" id="s4">
+  <h1>From a thin sample to a crowding estimate</h1>
+  <p class="sub">Four steps turn tickets into how full each bus is likely to be</p>
+  <div class="grid">
+    <div class="steps">
+      <div class="card step"><div class="n">1</div><div><b>Place tickets on their route</b><span>Match every boarding and alighting stop</span></div></div>
+      <div class="card step"><div class="n">2</div><div><b>Count riders on each stretch</b><span>By half hour and day type</span></div></div>
+      <div class="card step"><div class="n">3</div><div><b>Divide by the buses that ran</b><span>Timetable and GPS trip counts</span></div></div>
+      <div class="card step"><div class="n">4</div><div><b>Scale up and add a range</b><span>Every estimate carries a confidence</span></div></div>
+    </div>
+    <div class="card chartcard" style="padding:30px 34px"><h3>Step 1: where ticket stop names end up</h3><p class="note">Share of stop names by how they were placed on the route</p><div id="c4"></div></div>
+  </div>
+  <div class="num">4</div></section>
+
+<section class="slide" id="s5">
+  <h1>Tested on days the model did not see</h1>
+  <p class="sub">The model was fitted on the first three weeks and checked on the last nine days of October</p>
+  <div class="grid">
+    <div><div class="card chartcard"><h3>Share of actual ticket counts inside the 80% range</h3><p class="note">Target is 80%</p><div id="c5a"></div></div>
+      <div class="card limits"><h3>Limits</h3><ul><li>Absolute crowding rests on an assumed share of riders</li><li>Timings come from the timetable</li><li>One month of data</li></ul></div></div>
+    <div><div class="card chartcard"><h3>Average load through a weekday</h3><p class="note">Estimated riders on board per bus, hourly average · peaks found by the model on its own</p><div id="c5b"></div></div>
+      <div class="repo">github.com/hrsh-kr/seatwise</div></div>
+  </div>
+  <div class="num">5</div></section>
+
+<script>
+const D = __DATA__;
+const $ = s => document.querySelector(s);
+// seats on the bus
+(function(){const g=$("#seats");let s="";const cols=["#4caf7a","#4caf7a","#e8a33d","#4caf7a","#d9534a","#e8a33d","#d9534a","#d9534a","#e8a33d","#4caf7a","#d9534a"];
+ cols.forEach((c,i)=>{const x=98+i*48;s+=`<circle cx="${x}" cy="218" r="15" fill="${c}"/><rect x="${x-16}" y="238" width="32" height="34" rx="12" fill="${c}" opacity=".85"/>`});g.innerHTML=s;})();
+// s3 hourly bars
+(function(){const W=880,H=500,m={l:80,r:10,t:20,b:50};const h=D.hourly_tickets;const max=14000;let s=`<svg viewBox="0 0 ${W} ${H}" width="100%">`;
+ [0,5000,10000,15000].forEach(v=>{const y=m.t+(H-m.t-m.b)*(1-v/15000);s+=`<line class="gl" x1="${m.l}" x2="${W-m.r}" y1="${y}" y2="${y}"/><text class="ax" x="${m.l-12}" y="${y+7}" text-anchor="end">${v/1000}k</text>`});
+ const bw=(W-m.l-m.r)/24;
+ for(let i=0;i<24;i++){const v=h[i]||0,bh=(H-m.t-m.b)*v/15000,x=m.l+i*bw+4,y=H-m.b-bh;const peak=(i>=8&&i<=9)||(i>=17&&i<=19);
+  s+=`<rect x="${x}" y="${y}" width="${bw-8}" height="${bh}" rx="5" fill="${peak?'#2f5fb3':'#9fb4d6'}"/>`;
+  if(i%3===0)s+=`<text class="ax" x="${x+(bw-8)/2}" y="${H-18}" text-anchor="middle">${String(i).padStart(2,"0")}</text>`}
+ s+=`<text class="lab" x="${m.l+8*bw}" y="${m.t+30}" >Morning peak</text><text class="lab" x="${m.l+16.2*bw}" y="${m.t+130}">Evening peak</text></svg>`;$("#c3").innerHTML=s})();
+// s4 stacked bar
+(function(){const sh=D.stop_share;const parts=[["Exact match",sh.exact,"#2f5fb3"],["Spelling and key words",sh.normalised+sh["distinctive-tokens"],"#4f86d8"],["Close match",sh.fuzzy,"#7fa8e6"],["Map position",sh["geo-snap"],"#b0c8f0"],["Not placed by name",sh.unresolved,"#d9534a"]];
+ const W=880,x0=0;let x=x0,s=`<svg viewBox="0 0 ${W} 420" width="100%"><g>`;
+ parts.forEach(p=>{const w=W*p[1];s+=`<rect x="${x}" y="40" width="${w-3}" height="90" rx="8" fill="${p[2]}"/>`;if(w>90)s+=`<text x="${x+w/2}" y="96" text-anchor="middle" fill="#fff" font-size="30" font-weight="700">${(p[1]*100).toFixed(0)}%</text>`;x+=w});
+ s+=`</g>`;let y=190;parts.forEach(p=>{s+=`<rect x="0" y="${y-20}" width="26" height="26" rx="6" fill="${p[2]}"/><text class="lab" x="42" y="${y}" style="font-weight:500">${p[0]}</text><text class="lab" x="${W}" y="${y}" text-anchor="end">${(p[1]*100).toFixed(1)}%</text>`;y+=46});
+ s+=`</svg><p style="font-size:26px;color:#1f2d3d;margin:6px 0 0"><b>Neighbour logic then places more names between the stops around them.</b><br>In the end ${(D.boarding_resolved*100).toFixed(0)}% of boardings sit on a route.</p>`;$("#c4").innerHTML=s})();
+// s5a coverage bars
+(function(){const W=560,H=300,m={l:60,t:20,b:62};const bars=[["Plain count\nmodel",D.coverage_by_phi["1.0"],"#9fb4d6"],["Seatwise",D.coverage_by_phi["2.0"],"#2f5fb3"]];
+ let s=`<svg viewBox="0 0 ${W} ${H}" width="100%">`;[0,25,50,75,100].forEach(v=>{const y=m.t+(H-m.t-m.b)*(1-v/100);s+=`<line class="gl" x1="${m.l}" x2="${W}" y1="${y}" y2="${y}"/><text class="ax" x="${m.l-10}" y="${y+7}" text-anchor="end">${v}</text>`});
+ bars.forEach((b,i)=>{const bh=(H-m.t-m.b)*b[1],x=m.l+40+i*210,y=H-m.b-bh;s+=`<rect x="${x}" y="${y}" width="150" height="${bh}" rx="8" fill="${b[2]}"/><text x="${x+75}" y="${y+44}" text-anchor="middle" style="font-size:34px;font-weight:700;fill:#fff">${(b[1]*100).toFixed(1)}%</text>`;
+  b[0].split("\n").forEach((t,k)=>{s+=`<text class="ax" x="${x+75}" y="${H-32+k*24}" text-anchor="middle">${t}</text>`})});
+ const ty=m.t+(H-m.t-m.b)*(1-.8);s+=`<line x1="${m.l}" x2="${W}" y1="${ty}" y2="${ty}" stroke="#d9534a" stroke-width="3" stroke-dasharray="8 8"/><text x="${m.l+4}" y="${ty-10}" fill="#b3261e" font-size="22" font-weight="650">target 80%</text></svg>`;$("#c5a").innerHTML=s})();
+// s5b weekday profile
+(function(){const W=900,H=400,m={l:70,r:20,t:30,b:60};const raw=Object.entries(D.profile);const hr={};raw.forEach(([t,v])=>{const h=+t.slice(0,2);(hr[h]=hr[h]||[]).push(v)});
+ const e=Object.keys(hr).map(h=>[String(h).padStart(2,"0")+":00",hr[h].reduce((a,b)=>a+b,0)/hr[h].length]);const max=60;
+ let s=`<svg viewBox="0 0 ${W} ${H}" width="100%">`;[0,20,40,60].forEach(v=>{const y=m.t+(H-m.t-m.b)*(1-v/max);s+=`<line class="gl" x1="${m.l}" x2="${W-m.r}" y1="${y}" y2="${y}"/><text class="ax" x="${m.l-12}" y="${y+7}" text-anchor="end">${v}</text>`});
+ const X=i=>m.l+(W-m.l-m.r)*i/(e.length-1),Y=v=>m.t+(H-m.t-m.b)*(1-Math.min(v,max)/max);
+ let d="";e.forEach((p,i)=>{d+=(i?"L":"M")+X(i).toFixed(1)+" "+Y(p[1]).toFixed(1)});
+ s+=`<path d="${d} L${X(e.length-1)} ${H-m.b} L${X(0)} ${H-m.b} Z" fill="rgba(47,95,179,.14)"/><path d="${d}" fill="none" stroke="#2f5fb3" stroke-width="5" stroke-linejoin="round"/>`;
+ e.forEach((p,i)=>{if(p[0].endsWith(":00")&&+p[0].slice(0,2)%3===0)s+=`<text class="ax" x="${X(i)}" y="${H-20}" text-anchor="middle">${p[0].slice(0,2)}</text>`});
+ const pk=(lo,hi)=>e.reduce((b,p,i)=>{const h=+p[0].slice(0,2);return h>=lo&&h<hi&&p[1]>(b<0?-1:e[b][1])?i:b},-1);
+ [[pk(5,12),"Morning peak"],[pk(15,24),"Evening peak"]].forEach(([i,l])=>{if(i>=0){s+=`<circle cx="${X(i)}" cy="${Y(e[i][1])}" r="9" fill="#d9534a"/><text class="lab" x="${X(i)}" y="${Y(e[i][1])-18}" text-anchor="middle">${l}</text>`}});
+ s+=`</svg>`;$("#c5b").innerHTML=s})();
+// show slide from hash
+function show(){const n=(location.hash||"#s1").slice(1);document.querySelectorAll(".slide").forEach(x=>x.classList.toggle("on",x.id===n))}
+addEventListener("hashchange",show);show();
+</script>
+</body>
+</html>
